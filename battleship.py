@@ -4,7 +4,7 @@ battleship.py
 from random import randint
 def main():
     """
-    main function
+    main function`
     """
     board = []
     for num in range(5):
@@ -35,16 +35,20 @@ def main():
     for turn in range(4):
         guess_row = int(raw_input("Guess Row:"))
         guess_col = int(raw_input("Guess Col:"))
+        while (guess_row > 4 or guess_row < 0) or (guess_col > 4 or guess_col < 0):
+            print "Those are invalid coordinates. Guess again."
+            guess_row = int(input("Guess Row:"))
+            guess_col = int(input("Guess Col:"))
         if guess_row == ship_row and guess_col == ship_col:
             print "Congratulations! You sunk my battleship!"
+            break
         else:
-            if (guess_row < 0 or guess_row > 4) or (guess_col < 0 or guess_col > 4):
-                if board[guess_row][guess_col] == "X":
-                    print "You guessed that one already."
-                else:
-                    print "You missed my battleship!"
-                    board[guess_row][guess_col] = "X"
-                    print "Turn", turn + 1
+            if board[guess_row][guess_col] == "X":
+                print "You guessed that one already."
+            else:
+                print "You missed my battleship!"
+                board[guess_row][guess_col] = "X"
+                print "Turn", turn + 1
         if turn == 3:
             print "Game Over"
             print_board(board)
